@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.mapper.UserMapper">
+		 
+  	<select id="login"  parameterType="com.hrm.entity.User" resultType="com.hrm.entity.User">
+  		select * from user where uname=#{uname} and upwd=#{upwd}
+  	</select>
+  	<select id="findByUname"  parameterType="com.hrm.entity.User" resultType="com.hrm.entity.User">
+  		select * from user where uname=#{uname} 
+  	</select>
+	<insert id="register" parameterType="com.hrm.entity.User" >
+		insert into user(uname,upwd,uphone) values(#{uname},#{upwd},#{uphone})
+	</insert>
+		
+	<insert id="saveRate" parameterType="com.hrm.entity.Hrm" >
+		insert into hrm(uno,heartrate) values(#{uno},#{heartrate})
+	</insert>
+	<update id="updateRate" parameterType="com.hrm.entity.Hrm">
+		update hrm SET heartrate = #{heartrate} where uno = #{uno}
+	</update>
+	<select id="findRate" parameterType="com.hrm.entity.User" resultType="com.hrm.entity.Hrm">
+		select heartrate from hrm where uno = #{uno} order by hrmno desc limit 1
+	</select>
+	<select id="findRates" parameterType="com.hrm.entity.User" resultType="com.hrm.entity.Hrm">
+		select heartrate from hrm where uno = #{uno} order by hrmno desc limit 10
+	</select>
+</mapper>
